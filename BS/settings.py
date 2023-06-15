@@ -11,12 +11,12 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATABASE_URL ="postgresql://postgres:otwAug3ak6R6YkyQj8Ra@containers-us-west-96.railway.app:7367/railway"
 
-# DATABASE_URL ="postgresql://postgres:xT2HdPASiL6Y830o99Au@containers-us-west-145.railway.app:6702/railway"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'whitenoise.runserver_nostatic',  
     'django.contrib.humanize',
-
+    'whitenoise.runserver_nostatic',
+    
     'pages',
     'Core',
     'listings',
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'BS.urls'
@@ -80,44 +80,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'BS.wsgi.application'
 
-
+DATABASES = {
+    "default":dj_database_url.config(default=DATABASE_URL,conn_max_age=1800),
+}
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-
-# DATABASES = {
-#     "default": dj_database_url.config(default=DATABASE_URL,conn_max_age=1800),
-# }
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'bsdb',
+#         'NAME': 'dbsb',
 #         'USER': 'postgres',
-#         'PASSWORD': 'Woxsen19@',
+#         'PASSWORD': 'Mba@2024',
 #         'HOST': 'localhost'
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
-    }
-}
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': os.environ["PGDATABASE"],
-#         'USER': os.environ["PGUSER"],
-#         'PASSWORD': os.environ["PGPASSWORD"],
-#         'HOST': os.environ["PGHOST"],
-#         'PORT': os.environ["PGPORT"],
-#     }
-# }
-
-
-
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 # Password validation
